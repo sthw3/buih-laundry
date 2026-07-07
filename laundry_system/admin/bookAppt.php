@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ");
     $stmtCustomer->bind_param("sssss", $customer_name, $customer_phone, $customer_email, $customer_address, $placeholder_password);
     $stmtCustomer->execute();
+    $customer_id = $conn->insert_id;
 
     /* Insert Appointment */
     $stmt = $conn->prepare("
