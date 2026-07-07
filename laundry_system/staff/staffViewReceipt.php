@@ -154,6 +154,38 @@ body {
 .back-link:hover {
     color: #2dd4bf;
 }
+
+    .print-btn {
+    background: #253154;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.print-btn:hover {
+    background: #1a2340;
+}
+
+@media print {
+    .back-link,
+    .print-btn {
+        display: none !important;
+    }
+    body {
+        background: #fff;
+        padding: 0;
+    }
+    .receipt-card {
+        box-shadow: none;
+        border: none;
+    }
+}
 </style>
 </head>
 <body>
@@ -193,6 +225,12 @@ body {
         <div class="receipt-row total-row">
             <div class="receipt-label">Total Amount</div>
             <div class="receipt-value">RM <?= htmlspecialchars(number_format($row['Total_amount'] ?? 0, 2)) ?></div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="print-btn" onclick="window.print()">
+                <i class="bi bi-printer"></i> Print Receipt
+            </button>
         </div>
     </div>
 </div>
