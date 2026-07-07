@@ -255,6 +255,16 @@ Logout
 </div>
 
 </div>
+<script>
+// Press Ctrl + Shift + A to open admin panel
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+    window.open('../admin/loginAdmin.php', '_blank');
+  }
+});
+</script>
+</body>
+</html>
 
 </body>
 
