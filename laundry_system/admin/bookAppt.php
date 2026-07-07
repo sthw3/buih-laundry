@@ -42,14 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $customer_id = $conn->insert_id;
 
     /* Insert Appointment */
+   $collection_method = "Pickup"; // default for admin-created appointments
+
     $stmt = $conn->prepare("
         INSERT INTO appointment
-        (Customer_ID, Staff_ID, Appointment_Date, Appointment_Time, Appointment_Remark, Appointment_Status)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (Customer_ID, Staff_ID, Appointment_Date, Appointment_Time, Appointment_Remark, Appointment_Status, Collection_Method)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->bind_param("iissss", $customer_id, $staff_id, $date, $time, $remark, $status);
+    $stmt->bind_param("iisssss", $customer_id, $staff_id, $date, $time, $remark, $status, $collection_method);
     $stmt->execute();
-    $appointment_id = $stmt->insert_id;
+    $appointment_id = $conn->insert_id;
 
     /* Insert Services */
     if (!empty($service_ids)) {
