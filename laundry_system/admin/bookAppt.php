@@ -24,13 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $service_ids    = $_POST['services'] ?? [];
 
     /* Insert Customer — now includes phone, email, address */
+    // $stmtCustomer = $conn->prepare("
+    //     INSERT INTO customer (Customer_Name, Cust_PhoneNum, Email, Address)
+    //     VALUES (?, ?, ?, ?)
+    // ");
+    // $stmtCustomer->bind_param("ssss", $customer_name, $customer_phone, $customer_email, $customer_address);
+    // $stmtCustomer->execute();
+    // $customer_id = $stmtCustomer->insert_id;
+    $placeholder_password = password_hash(uniqid(), PASSWORD_DEFAULT);
+
     $stmtCustomer = $conn->prepare("
-        INSERT INTO customer (Customer_Name, Cust_PhoneNum, Email, Address)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO customer (Customer_Name, Cust_PhoneNum, Email, Address, Customer_Password)
+        VALUES (?, ?, ?, ?, ?)
     ");
-    $stmtCustomer->bind_param("ssss", $customer_name, $customer_phone, $customer_email, $customer_address);
+    $stmtCustomer->bind_param("sssss", $customer_name, $customer_phone, $customer_email, $customer_address, $placeholder_password);
     $stmtCustomer->execute();
-    $customer_id = $stmtCustomer->insert_id;
 
     /* Insert Appointment */
     $stmt = $conn->prepare("
