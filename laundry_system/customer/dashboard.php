@@ -262,6 +262,13 @@ document.addEventListener('keydown', function(e) {
     window.open('../admin/loginAdmin.php', '_blank');
   }
 });
+
+// Press Ctrl + Shift + S to open staff panel
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+    window.open('../staff/loginStaff.php', '_blank');
+  }
+});
 </script>
 </body>
 </html>
