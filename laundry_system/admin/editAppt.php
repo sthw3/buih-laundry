@@ -14,54 +14,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-    if($_POST['status']=="Completed") {
-    $payment_id = $_POST['payment_id'];
+//     if($_POST['status']=="Completed") {
+//     $payment_id = $_POST['payment_id'];
 
-    // Calculate total price
-    $total = 0;
-    $priceQuery = mysqli_query($conn,"
-    SELECT service.Price
-    FROM appointment_service
-    INNER JOIN service
-    ON appointment_service.Service_ID = service.Service_ID
-    WHERE Appointment_ID='$id'
-    ");
+//     // Calculate total price
+//     $total = 0;
+//     $priceQuery = mysqli_query($conn,"
+//     SELECT service.Price
+//     FROM appointment_service
+//     INNER JOIN service
+//     ON appointment_service.Service_ID = service.Service_ID
+//     WHERE Appointment_ID='$id'
+//     ");
 
-        while($price = mysqli_fetch_assoc($priceQuery)) {
-        $total += $price['Price'];
-    }
+//         while($price = mysqli_fetch_assoc($priceQuery)) {
+//         $total += $price['Price'];
+//     }
 
-    // Check receipt already exists
-    $check = mysqli_query($conn,"
-    SELECT *
-    FROM receipt
-    WHERE Appointment_ID='$id'
-    ");
+//     // Check receipt already exists
+//     $check = mysqli_query($conn,"
+//     SELECT *
+//     FROM receipt
+//     WHERE Appointment_ID='$id'
+//     ");
 
-    if(mysqli_num_rows($check)==0)
-    {
+//     if(mysqli_num_rows($check)==0)
+//     {
 
-        mysqli_query($conn,"
-        INSERT INTO receipt
-        (
-            Appointment_ID,
-            Payment_ID,
-            Total_Amount,
-            Issued_Date
-        )
+//         mysqli_query($conn,"
+//         INSERT INTO receipt
+//         (
+//             Appointment_ID,
+//             Payment_ID,
+//             Total_Amount,
+//             Issued_Date
+//         )
 
-        VALUES
-        (
-            '$id',
-            '$payment_id',
-            '$total',
-            CURDATE()
-        )
-        ");
+//         VALUES
+//         (
+//             '$id',
+//             '$payment_id',
+//             '$total',
+//             CURDATE()
+//         )
+//         ");
 
-    }
+//     }
 
-}
+// }
 
     // Update Services (Delete old, Insert new)
     $del = $conn->prepare("DELETE FROM appointment_service WHERE Appointment_ID = ?");
