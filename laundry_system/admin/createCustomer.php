@@ -22,10 +22,12 @@ if(isset($_POST['submit']))
     $email = $_POST['email'];
     $address = $_POST['address'];
 
+   $placeholderPassword = password_hash(uniqid(), PASSWORD_DEFAULT);
+
     $sql = "INSERT INTO customer
-            (Customer_ID, Customer_Name, Cust_PhoneNum, Email, Address)
+            (Customer_ID, Customer_Name, Cust_PhoneNum, Email, Address, Customer_Password)
             VALUES
-            ('$customerID', '$customerName', '$phoneNum', '$email', '$address')";
+            ('$customerID', '$customerName', '$phoneNum', '$email', '$address', '$placeholderPassword')";
 
     if(mysqli_query($conn, $sql))
     {
